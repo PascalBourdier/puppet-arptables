@@ -1,0 +1,7 @@
+<%- if $::arptables::virtual_ip =~ Array { $arptables::virtual_ip.each |$virtual| { %>
+ip addr add <%= $virtual %> dev <%= $arptables::interface %> 
+<%- } } %>
+
+<%- if $::arptables::virtual_ip =~ String { %>
+ip addr add <%= $::arptables::virtual_ip %> dev <%= $arptables::interface %> 
+<%- } %>

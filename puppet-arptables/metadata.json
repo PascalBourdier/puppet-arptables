@@ -1,0 +1,32 @@
+{
+  "name": "novakv-arptables",
+  "version": "1.0.0",
+  "author": "novakv",
+  "summary": "Manages arptables",
+  "license": "Apache License, Version 2.0",
+  "source": "https://github.com/novakv/puppet-arptables.git",
+  "project_page": "https://github.com/novakv/puppet-arptables",
+  "issues_url": "https://github.com/novakv/puppet-arptables/issues",
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 3.7.3"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6"
+      ]
+    }
+  ],
+  "description": "Manage arptables",
+  "types": [
+  
+  ],
+  "dependencies": [
+    {"name":"puppetlabs/stdlib","version_requirement":">= 4.5.0"},
+    {"name":"novakv/rclocal","version_requirement":">= 1.0.0"}
+  ]
+}

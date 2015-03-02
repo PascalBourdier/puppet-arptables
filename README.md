@@ -2,9 +2,9 @@
 
 This module makes use of the Puppet Type System and EPP templates, so it only works in 3.7 when the future parser is enabled.
 
-It configures direct routing on RedHat using arptables_jf.
+On RedHat, in a direct routing load balancer setup, this module configures direct routing on real servers using arptables_jf.
 
-With its default settings this module will overwrite `/etc/rc.d/rc.local`. Set `manage_ip_alias` to false to prevent this.
+This module manages `/etc/sysconfig/arptables`. With its default settings, it will also add ip aliasses and overwrite `/etc/rc.d/rc.local`. Set `manage_ip_alias` to false to prevent changes to `rc.local`.
 
 ##Parameters
 
@@ -14,17 +14,17 @@ With its default settings this module will overwrite `/etc/rc.d/rc.local`. Set `
 ###service_ensure
     Default: stopped
 
-The reasoning behind above defaults is that often PREROUTING chain in iptables is used to achieve the same goal. So in order to configure direct routing using arptables_jf, you must change these defaults.
+The reasoning behind above defaults is that often the PREROUTING chain in iptables is used to achieve the same goal. So in order to configure direct routing using arptables_jf, you must change these defaults.
 
 ###manage_ip_alias
     Default: true (boolean)
     
-If not already configured, adds ip aliasses to interface specified in `interface` and adds them to `rc.local` for configuration to persist after reboots.
+If not already configured, adds ip aliasses to the interface specified in `interface` and adds them to `rc.local` for configuration to persist after reboots.
 
 ###virtual_ip
     Default: undef
 
-Always specify `virtual_ip`, as string or array, when `manage_ip_alias` is true. Beside adding ip aliasses through `rc.local`, it is used for configuring arptables when there is a single real ip on the system.
+Always specify `virtual_ip`, as string or array, when `manage_ip_alias` is true. In addition to adding ip aliasses through `rc.local`, it is used for configuring arptables when there is a single real ip on the system.
 
 ###real_ip
     Default: undef

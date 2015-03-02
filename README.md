@@ -4,7 +4,7 @@ This module makes use of the Puppet Type System and EPP templates, so it only wo
 
 It configures direct routing on RedHat using arptables_jf.
 
-With its default settings this module will overwrite '/etc/rc.d/rc.local'. Set 'manage_ip_alias' to false to prevent this.
+With its default settings this module will overwrite `/etc/rc.d/rc.local`. Set `manage_ip_alias` to false to prevent this.
 
 ##Parameters
 
@@ -19,32 +19,32 @@ The reasoning behind above defaults is that often PREROUTING chain in iptables i
 ###manage_ip_alias
     Default: true (boolean)
     
-If not already configured, adds ip aliasses to interface specified in 'interface' and adds them to rc.local for configuration to persist after reboots.
+If not already configured, adds ip aliasses to interface specified in `interface` and adds them to `rc.local` for configuration to persist after reboots.
 
 ###virtual_ip
     Default: undef
 
-Always specify 'virtual_ip', as string or array, when 'manage_ip_alias' is true. Beside adding ip aliasses through rc.local, it is used for configuring arptables when there is a single real ip on the system.
+Always specify `virtual_ip`, as string or array, when `manage_ip_alias` is true. Beside adding ip aliasses through `rc.local`, it is used for configuring arptables when there is a single real ip on the system.
 
 ###real_ip
     Default: undef
-Specify 'real_ip' string only when there is a sigle real ip, otherwise use 'virtual_real_ip' mapping.
+Specify `real_ip` string only when there is a sigle real ip, otherwise use `virtual_real_ip` mapping.
 
 ###virtual_real_ip
     Default: undef
 
-'virtual_real_ip' hash is used to configure arptables when there are multiple real ips on the system.
+`virtual_real_ip` hash is used to configure arptables when there are multiple real ips on the system.
     
 ###interface
     Default: undef
 
-Always specify interface when manage_ip_alias is true (default). It is used in adding ip aliasses through rc.local.
+Always specify interface when `manage_ip_alias` is true (default). It is used in adding ip aliasses through `rc.local`.
 
 # Usage
 
 Sample Hiera configurations
 
-serverone.yaml
+`serverone.yaml`
 
     arptables::service_enable: true
     arptables::service_ensure: running
@@ -52,7 +52,7 @@ serverone.yaml
     arptables::real_ip: 10.0.2.15
     arptables::interface: eth0
 
-servertwo.yaml
+`servertwo.yaml`
 
     arptables::service_enable: true
     arptables::service_ensure: running

@@ -2,6 +2,10 @@
 
 This module makes use of the Puppet Type System and EPP templates, so it only works in 3.7 when the future parser is enabled.
 
+It configures direct routing on RedHat using arptables_jf.
+
+With its default settings this module will overwrite '/etc/rc.d/rc.local'. Set 'manage_ip_alias' to false to prevent this.
+
 ##Parameters
 
 ###service_enable
@@ -10,7 +14,7 @@ This module makes use of the Puppet Type System and EPP templates, so it only wo
 ###service_ensure
     Default: stopped
 
-The reasoning behind above defaults is that ofter PREROUTING chain in iptables is used to achieve the same goal.
+The reasoning behind above defaults is that often PREROUTING chain in iptables is used to achieve the same goal. So in order to configure direct routing using arptables_jf, you must change these defaults.
 
 ###manage_ip_alias
     Default: true (boolean)

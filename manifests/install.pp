@@ -8,11 +8,6 @@ class arptables::install {
           ensure => present,
         }
       }
-      #'Suse': {
-      #  package { 'arptables': 
-      #    ensure => present,
-       # }
-      #}  
       default: {
         fail("The ${module_name} module is not supported on an ${::operatingsystem} distribution.")
       }

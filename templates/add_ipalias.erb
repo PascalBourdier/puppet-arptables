@@ -1,3 +1,0 @@
-<% scope['arptables::virtual_ip'].each do |val| -%>
-ip addr add <%= val %> dev <%= scope['arptables::interface'] %>
-<% end -%>

@@ -21,10 +21,6 @@
       ]
     }
   ],
-  "description": "Manage arptables",
-  "types": [
-  
-  ],
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 4.5.0"},
     {"name":"novakv/rclocal","version_requirement":">= 1.0.0"}

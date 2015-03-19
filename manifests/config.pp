@@ -13,14 +13,12 @@ if $::arptables::manage_ip_alias == true {
 
     # register yourself in rclocal
     ::rclocal::register{ 'arptables': 
-      #content    => template("arptables/add_ipalias.erb"),
       content    => epp("arptables/add_ipalias.epp"),
       subscribe  => File[$::arptables::arp_packetfilter],
     }
     
     case $::arptables::virtual_ip {
       String : {
-        #notice $::arptables::virtual_ip
         exec { "run_ip_add_${::arptables::virtual_ip}":
           command     => "/sbin/ip addr add ${::arptables::virtual_ip} dev ${::arptables::interface}",
           unless      => "/sbin/ip -4 a | grep ${::arptables::virtual_ip}",
@@ -30,7 +28,6 @@ if $::arptables::manage_ip_alias == true {
       }
       Array : {
         each($::arptables::virtual_ip) |$value| { 
-          #notice $value
           exec { "run_ip_add_${value}":
             command     => "/sbin/ip addr add ${value} dev ${::arptables::interface}",
             unless      => "/sbin/ip -4 a | grep ${value}",

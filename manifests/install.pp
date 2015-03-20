@@ -4,7 +4,7 @@ class arptables::install {
 
     case $::osfamily {
       'RedHat': {
-        package { 'arptables_jf': 
+        package { 'arptables_jf':
           ensure => present,
         }
       }

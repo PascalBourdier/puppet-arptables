@@ -37,7 +37,7 @@ if $::arptables::manage_ip_alias == true {
         }
       }
       default: {
-        fail("The ${$::arptables::virtual_ip} is of type that is not supported.")
+        fail('The $::arptables::virtual_ip is of type that is not supported')
       }
     }
 }

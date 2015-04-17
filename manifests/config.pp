@@ -25,7 +25,7 @@ class arptables::config {
             command     => "/sbin/ip addr add ${::arptables::virtual_ip} dev ${::arptables::interface}",
             unless      => "/sbin/ip -4 a | grep ${::arptables::virtual_ip}",
             subscribe   => File[$::arptables::arp_packetfilter],
-            refreshonly => true,
+            #refreshonly => true,
           }
         }
         Array : {
@@ -34,7 +34,7 @@ class arptables::config {
               command     => "/sbin/ip addr add ${value} dev ${::arptables::interface}",
               unless      => "/sbin/ip -4 a | grep ${value}",
               subscribe   => File[$::arptables::arp_packetfilter],
-              refreshonly => true,
+              #refreshonly => true,
             }
           }
         }

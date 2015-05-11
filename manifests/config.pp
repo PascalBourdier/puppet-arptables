@@ -2,9 +2,19 @@ class arptables::config {
 
   unless $::arptables::service_enable == false {
 
+    case $::operatingsystemmajrelease {
+      '6': {
+        $template = 'arptables/arptables.epp'
+      }
+      '7': {
+        $template = 'arptables/arptables7.epp'
+      }
+    }
+
     file { $::arptables::arp_packetfilter:
       ensure  => 'file',
-      content => epp('arptables/arptables.epp'),
+      content => epp($template),
+      #content => epp('arptables/arptables.epp'),
       owner   => 'root',
       group   => 'root',
       require => Class['arptables::install'],

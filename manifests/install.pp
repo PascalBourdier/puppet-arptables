@@ -4,8 +4,17 @@ class arptables::install {
 
     case $::osfamily {
       'RedHat': {
-        package { 'arptables_jf':
-          ensure => present,
+        case $::operatingsystemmajrelease {
+          '6': {
+            package { 'arptables_jf':
+              ensure => present,
+            }
+          }
+          '7': {
+            package { 'arptables':
+              ensure => present,
+            }   
+          }
         }
       }
       default: {

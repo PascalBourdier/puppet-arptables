@@ -1,0 +1,24 @@
+# Managed by puppet - do not modify
+#
+*filter
+:INPUT ACCEPT
+:OUTPUT ACCEPT
+:FORWARD ACCEPT
+<%# Multiple virtual and multiple real ip addresses -%>
+<%- if $::arptables::virtual_real_ip =~ Hash { $arptables::virtual_real_ip.each |$virtual, $real| { %>
+-A INPUT -d <%= $virtual %> -j DROP 
+-A OUTPUT -s <%= $virtual %> -j mangle --mangle-ip-s <%= $real %>
+<%- } } %>
+<%# Multiple virtual adresses, single real ip address -%>
+<%- elsif $::arptables::virtual_ip =~ Array { $arptables::virtual_ip.each |$virtual| { %>
+-A INPUT -d <%= $virtual %> -j DROP
+-A OUTPUT -s <%= $virtual %> -j mangle --mangle-ip-s <%= $arptables::real_ip %>
+<%- } } %>
+<%# Single virtual and single real ip address -%>
+<%- elsif $::arptables::virtual_ip =~ String { %>
+-A INPUT -d <%= $::arptables::virtual_ip %> -j DROP
+-A OUTPUT -s <%= $::arptables::virtual_ip %> -j mangle --mangle-ip-s <%= $arptables::real_ip %>
+<%- } %>
+<%- else { %>
+<%- } %>
+

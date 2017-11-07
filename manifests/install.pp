@@ -1,3 +1,4 @@
+#
 class arptables::install {
 
   unless $::arptables::service_enable == false {
@@ -13,7 +14,10 @@ class arptables::install {
           '7': {
             package { 'arptables':
               ensure => present,
-            }   
+            }
+          }
+          default: {
+            fail("Unsupported operatingsystemmajrelease ${::operatingsystemmajrelease}")
           }
         }
       }

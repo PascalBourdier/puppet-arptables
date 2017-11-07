@@ -1,3 +1,4 @@
+#
 class arptables::service {
 
   case $::operatingsystemmajrelease {
@@ -6,6 +7,9 @@ class arptables::service {
     }
     '7': {
       $servicename = 'arptables'
+    }
+    default: {
+      fail("Unsupported operatingsystemmajrelease ${::operatingsystemmajrelease}")
     }
   }  
   service { $servicename:

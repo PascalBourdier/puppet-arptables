@@ -1,3 +1,4 @@
+#
 class arptables::config {
 
   unless $::arptables::service_enable == false {
@@ -8,6 +9,9 @@ class arptables::config {
       }
       '7': {
         $template = 'arptables/arptables7.epp'
+      }
+      default: {
+        fail("Unsupported operatingsystemmajrelease ${::operatingsystemmajrelease}")
       }
     }
 
@@ -32,18 +36,18 @@ class arptables::config {
       case $::arptables::virtual_ip {
         String : {
           exec { "run_ip_add_${::arptables::virtual_ip}":
-            command     => "/sbin/ip addr add ${::arptables::virtual_ip} dev ${::arptables::interface}",
-            unless      => "/sbin/ip -4 a | grep ${::arptables::virtual_ip}",
-            subscribe   => File[$::arptables::arp_packetfilter],
+            command   => "/sbin/ip addr add ${::arptables::virtual_ip} dev ${::arptables::interface}",
+            unless    => "/sbin/ip -4 a | grep ${::arptables::virtual_ip}",
+            subscribe => File[$::arptables::arp_packetfilter],
             #refreshonly => true,
           }
         }
         Array : {
           each($::arptables::virtual_ip) |$value| {
             exec { "run_ip_add_${value}":
-              command     => "/sbin/ip addr add ${value} dev ${::arptables::interface}",
-              unless      => "/sbin/ip -4 a | grep ${value}",
-              subscribe   => File[$::arptables::arp_packetfilter],
+              command   => "/sbin/ip addr add ${value} dev ${::arptables::interface}",
+              unless    => "/sbin/ip -4 a | grep ${value}",
+              subscribe => File[$::arptables::arp_packetfilter],
               #refreshonly => true,
             }
           }

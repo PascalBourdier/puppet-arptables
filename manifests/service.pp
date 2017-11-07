@@ -11,7 +11,7 @@ class arptables::service {
     default: {
       fail("Unsupported operatingsystemmajrelease ${::operatingsystemmajrelease}")
     }
-  }  
+  }
   service { $servicename:
     ensure => $::arptables::service_ensure,
     enable => $::arptables::service_enable,

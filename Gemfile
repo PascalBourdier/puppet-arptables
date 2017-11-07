@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'json',                                      :require => false
 gem 'metadata-json-lint',                        :require => false
 gem 'parallel_tests',                            :require => false
-gem 'puppet', ENV['PUPPET_VERSION'] || '~> 4.7', :require => false
+gem 'puppet', ENV['PUPPET_VERSION'] || '~> 4.8', :require => false
 gem 'puppet-lint', '~> 2.0',                     :require => false
 gem 'puppet-strings',                            :require => false
 gem 'puppet-syntax', '~> 2.0',                   :require => false
